@@ -8,42 +8,45 @@ import java.util.Scanner;
 public class ReponoyaTreeDSA {
 
     public static Scanner s = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
-          
-       ArrayList<Integer> reverseTree = new ArrayList<>();
-       BinaryTree tree = new BinaryTree();
-       
-       
-        System.out.println("Type `0` -> Exit");
         
+       BinaryTree tree = new BinaryTree();
+
+
+        System.out.println("Type `0` -> Exit");
+
        while(true) {
-           
+
            int newBalon = -1;
-           
+
            System.out.print("Enter Balon : ");
-           
+
            try{
                newBalon = s.nextInt(); s.nextLine();
            }
            catch(Exception e) {
                System.out.println("Invalid Input"); s.nextLine();
            }
-          
-           
+
+
            if(newBalon == 0) break;
            else if(newBalon != -1) {
                tree.insert(newBalon);
-               reverseTree.add(newBalon);
            }
        }
-       
+
         System.out.println("---------- Mga Balons ----------");
-        reverseTree.sort(Comparator.naturalOrder());
-        for (int i = reverseTree.size()- 1; i > 0; i--) {
-            System.out.println(reverseTree.get(i));
-        }
+        inorderReverseRec(tree.root);
         System.out.println("--------------------------------");
+    }
+    
+    public static void inorderReverseRec (Node root) {
+        if(root != null) {
+            inorderReverseRec(root.right);
+            System.out.println(root.value);
+            inorderReverseRec(root.left);
+        }
     }
 }
 
